@@ -46,8 +46,6 @@ public class CalculadoraDePrioridadTest {
 
     @Test
     void error_yo_toque_eso() {
-//        int resp=calc.prioridad("Incidente", -1, false);
-//        assertEquals(4,resp );
         assertThrows(IllegalArgumentException.class,()->calc.prioridad("Incidente",-1,false));
     }
 
