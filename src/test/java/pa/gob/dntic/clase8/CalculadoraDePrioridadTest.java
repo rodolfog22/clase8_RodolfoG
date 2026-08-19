@@ -3,8 +3,7 @@ package pa.gob.dntic.clase8;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculadoraDePrioridadTest {
 
@@ -63,6 +62,11 @@ public class CalculadoraDePrioridadTest {
         assertEquals(5,resp );
     }
 
+    @Test
+    void error_con_AssertTrue() {
+        int resp= calc.prioridad("Incidente", 6, false);
+        assertTrue(resp == 4);
+    }
 
 
     @Test
