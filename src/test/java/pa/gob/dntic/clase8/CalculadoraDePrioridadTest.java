@@ -3,8 +3,7 @@ package pa.gob.dntic.clase8;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculadoraDePrioridadTest {
 
@@ -17,40 +16,65 @@ public class CalculadoraDePrioridadTest {
 
 
     @Test
-    void error001() {
+    void errorParaIncidente() {
         int resultado=calc.prioridad("Incidente", 2, false);
         assertEquals(3,resultado );
     }
 
     @Test
-    void error002() {
+    void errorParaCambio() {
         assertEquals(2, calc.prioridad("Cambio", 4, false));
     }
 
     @Test
-    void error003() {
+    void errorParaOtros() {
         assertEquals(1, calc.prioridad("otro", 5, false));
     }
 
     @Test
-    void error004() {
+    void errorCasoBorde5() {
         int resp=calc.prioridad("Incidente", 5, false);
         assertEquals(3,resp );
     }
 
     @Test
-    void error005() {
+    void errorCasoBorde6() {
         int resp=calc.prioridad("Incidente", 6, false);
         assertEquals(4,resp );
     }
 
+    //prueba criticidad
     @Test
-    void error_yo_toque_eso() {
-//        int resp=calc.prioridad("Incidente", -1, false);
-//        assertEquals(4,resp );
+    void errorCasoCriticidad() {
+        int resp=calc.prioridad("Incidente", 6, true);
+        assertEquals(5,resp );
+    }
+
+    @Test
+    void errorCasoCriticidad2() {
+        int resp=calc.prioridad("Cambio", 2, true);
+        assertEquals(5,resp );
+    }
+
+    @Test
+    void errorCasoCriticidad3() {
+        int resp=calc.prioridad("otro", 3, true);
+        assertEquals(5,resp );
+    }
+
+    @Test
+    void error_con_AssertTrue() {
+        int resp= calc.prioridad("Incidente", 6, false);
+        assertTrue(resp == 4);
+    }
+
+
+    @Test
+    void errorCasoNegativo() {
         assertThrows(IllegalArgumentException.class,()->calc.prioridad("Incidente",-1,false));
     }
 
+    //pruebas de nivel
     @Test
     void errorAlta() {
         int prioridad=calc.prioridad("Incidente", 6, false);
